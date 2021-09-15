@@ -1,13 +1,25 @@
 import assert = require('assert');
 
+interface ICommonOptions {
+  title?: string,
+  description?: string,
+  default?: any,
+  examples?: any[],
+  deprecated?: boolean,
+  readOnly?: boolean,
+  writeOnly?: boolean
+}
+
 /**
  * Schema block for 'array' type
  *
  * @param items - Items schema
+ * @param options
  */
-export function arr(items: object) {
+export function arr(items: object, options: ICommonOptions = {}) {
   return {
     type: 'array',
+    ...options,
     items,
   };
 }
@@ -25,6 +37,12 @@ export function nullable(value: any) {
   }
 }
 
+interface IObjOptions extends ICommonOptions {
+  optional?: string[],
+  required?: string[],
+  additionalProperties?: boolean
+}
+
 /**
  * Schema block for 'object' type
  *
@@ -33,7 +51,7 @@ export function nullable(value: any) {
  */
 export function obj(
   properties: Record<string, any>,
-  options: { optional?: string[]; required?: string[]; additionalProperties?: boolean } = {},
+  options: IObjOptions = {},
 ) {
   let required: string[] = [];
 
@@ -49,15 +67,22 @@ export function obj(
     }
   }
 
+  let opts = options;
+  // copy & modify (so original value wouldn't be affected) if optional is presented
+  if ('optional' in opts) {
+    opts = Object.assign({}, options);
+    delete opts.optional;
+  }
+
   return compact({
     type: 'object',
     properties,
     required,
-    additionalProperties: options.additionalProperties,
+    ...opts,
   });
 }
 
-interface IStrOptions {
+interface IStrOptions extends ICommonOptions {
   minLength?: number;
   maxLength?: number;
   pattern?: string;
@@ -92,6 +117,8 @@ export function str(minLengthOrOpts?: number | IStrOptions | null, maxLength?: n
 /**
  * Schema block for "string" enum. Can be used to define restricted list of values.
  *
+ * https://json-schema.org/understanding-json-schema/reference/generic.html
+ *
  * @param values - array of allowed values
  */
 export function enumStr(...values: string[]) {
@@ -101,7 +128,35 @@ export function enumStr(...values: string[]) {
   });
 }
 
-interface INumOptions {
+/**
+ * Schema block for enum without defined type. Can be used to define restricted list of values of different types.
+ *
+ * https://json-schema.org/understanding-json-schema/reference/generic.html
+ *
+ * @param values - array of allowed values
+ */
+export function enumeration(...values: (string | number | boolean | null)[]) {
+  return compact({
+    enum: values,
+  });
+}
+
+/**
+ * Schema block for const. Can be used to define restricted list of values of different types.
+ *
+ * https://json-schema.org/understanding-json-schema/reference/generic.html
+ *
+ * @param value - constant value
+ * @param options
+ */
+export function constant(value: string | number | boolean | null, options: ICommonOptions = {}) {
+  return compact({
+    const: value,
+    ...options,
+  });
+}
+
+interface INumOptions extends ICommonOptions {
   minimum?: number;
   maximum?: number;
   multipleOf?: number;
@@ -154,16 +209,17 @@ export function num(minimumOrOpts?: number | INumOptions | null, maximum?: numbe
  * Schema block for positive integer (>=1), shortcut to int(1).
  * E.g. record ID.
  */
-export function id() {
-  return int(1);
+export function id(options: ICommonOptions = {}) {
+  return int({minimum: 1, ...options});
 }
 
 /**
  * Schema block for "boolean" type
  */
-export function bool() {
+export function bool(options: ICommonOptions = {}) {
   return {
     type: 'boolean',
+    ...options,
   };
 }
 
