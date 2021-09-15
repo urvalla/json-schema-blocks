@@ -1,4 +1,4 @@
-import { str } from '../main';
+import {enumStr, str} from '../main';
 
 test('str', () => {
   expect(str()).toStrictEqual({ type: 'string' });
@@ -17,4 +17,8 @@ test('str with minLength & maxLength', () => {
 test('str with maxLength', () => {
   expect(str(0, 10)).toStrictEqual({ type: 'string', minLength: 0, maxLength: 10 });
   expect(str({ maxLength: 10 })).toStrictEqual({ type: 'string', maxLength: 10 });
+});
+
+test('enumStr', () => {
+  expect(enumStr('val1', 'val2')).toStrictEqual({ type: 'string', enum: ['val1', 'val2'] });
 });

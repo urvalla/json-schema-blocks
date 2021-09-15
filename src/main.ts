@@ -1,5 +1,10 @@
 import assert = require('assert');
 
+/**
+ * Schema block for 'array' type
+ *
+ * @param items - Items schema
+ */
 export function arr(items: object) {
   return {
     type: 'array',
@@ -7,6 +12,11 @@ export function arr(items: object) {
   };
 }
 
+/**
+ * Adds 'null' to any passed block
+ *
+ * @param value - Schema to extend with 'null'
+ */
 export function nullable(value: any) {
   if (typeof value.type === 'string') {
     return { ...value, type: [value.type, 'null'] };
@@ -15,8 +25,14 @@ export function nullable(value: any) {
   }
 }
 
+/**
+ * Schema block for 'object' type
+ *
+ * @param properties - properties
+ * @param options
+ */
 export function obj(
-  properties: object,
+  properties: Record<string, any>,
   options: { optional?: string[]; required?: string[]; additionalProperties?: boolean } = {},
 ) {
   let required: string[] = [];
@@ -54,7 +70,7 @@ function strOpts(opts: IStrOptions) {
 }
 
 /**
- * Schema for 'string' type
+ * Schema block for 'string' type
  *
  * @param minLengthOrOpts - number (minLength) or object with options
  * @param maxLength - maxLength option
@@ -69,6 +85,11 @@ export function str(minLengthOrOpts?: number | IStrOptions, maxLength?: number) 
   }
 }
 
+/**
+ * Schema block for "string" enum. Can be used to define restricted list of values.
+ *
+ * @param values - array of allowed values
+ */
 export function enumStr(...values: string[]) {
   return compact({
     type: 'string',
@@ -76,6 +97,12 @@ export function enumStr(...values: string[]) {
   });
 }
 
+/**
+ * Schema block for integer type
+ *
+ * @param minimum
+ * @param maximum
+ */
 export function int(minimum?: number, maximum?: number) {
   return compact({
     type: 'integer',
@@ -84,16 +111,26 @@ export function int(minimum?: number, maximum?: number) {
   });
 }
 
+/**
+ * Schema block for "number" type
+ */
 export function num() {
   return {
     type: 'number',
   };
 }
 
+/**
+ * Schema block for positive integer (>=1), shortcut to int(1).
+ * E.g. record ID.
+ */
 export function id() {
   return int(1);
 }
 
+/**
+ * Schema block for "boolean" type
+ */
 export function bool() {
   return {
     type: 'boolean',
