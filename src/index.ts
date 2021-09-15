@@ -19,9 +19,9 @@ export function nullable(value: any) {
 
 export function obj(
     properties: object,
-    options?: { optional?: Array<string>, required?: Array<string>, additionalProperties?: boolean }
+    options?: { optional?: string[], required?: string[], additionalProperties?: boolean }
 ) {
-    let required: Array<string> = []
+    let required: string[] = []
 
     if (options?.required) {
         assert(!options?.optional, "required and optional options can't be used simultaneously")
@@ -64,14 +64,14 @@ function strOpts(opts: IStrOptions) {
 export function str(minLengthOrOpts?: number | IStrOptions, maxLength?: number) {
     if (minLengthOrOpts === undefined) {
         return strOpts({})
-    } else if (typeof minLengthOrOpts == 'number') {
+    } else if (typeof minLengthOrOpts === 'number') {
         return strOpts({minLength: minLengthOrOpts, maxLength})
     } else {
         return strOpts(minLengthOrOpts)
     }
 }
 
-export function enumStr(...values: Array<string>) {
+export function enumStr(...values: string[]) {
     return compact({
         type: 'string',
         enum: values,

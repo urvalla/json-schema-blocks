@@ -5,13 +5,13 @@ Building blocks for human-friendly JSON-Schema definition.
 ```js
 // JSON example
 const json = {
-    prop1: "val1",
+    prop1: "value",
     prop2: 2
 }
 
 // schema defined with blocks
 const blocks = obj({
-    prop1: str(),
+    prop1: str(1),
     prop2: num()
 })
 
@@ -20,7 +20,8 @@ const jsonSchema = {
     type: "object",
     properties: {
         prop1: {
-            type: "string"
+            type: "string",
+            minLength: 1
         },
         prop2: {
             type: "number"
