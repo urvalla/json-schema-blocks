@@ -17,17 +17,17 @@ export function nullable(value: any) {
 
 export function obj(
   properties: object,
-  options?: { optional?: string[]; required?: string[]; additionalProperties?: boolean },
+  options: { optional?: string[]; required?: string[]; additionalProperties?: boolean } = {},
 ) {
   let required: string[] = [];
 
-  if (options?.required) {
-    assert(!options?.optional, "required and optional options can't be used simultaneously");
-    required = options.required;
+  if ('required' in options) {
+    assert(!options.optional, "required and optional options can't be used simultaneously");
+    required = options.required!;
   } else {
     required = Object.keys(properties);
 
-    const optional = options?.optional;
+    const optional = options.optional;
     if (optional) {
       required = required.filter((v) => !optional.includes(v));
     }
@@ -37,7 +37,7 @@ export function obj(
     type: 'object',
     properties,
     required,
-    additionalProperties: options?.additionalProperties,
+    additionalProperties: options.additionalProperties,
   });
 }
 
