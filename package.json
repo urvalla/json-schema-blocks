@@ -26,7 +26,7 @@
   "author": "Roman Ekzempliarov",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com"
+    "url": "https://github.com/urvalla/json-schema-blocks/issues"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",

@@ -1,7 +1,5 @@
 import assert = require('assert');
 
-export const Greeter = (name: string) => `Hello ${name}`;
-
 export function arr(items: object) {
     return {
         type: 'array',
