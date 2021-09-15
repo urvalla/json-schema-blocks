@@ -26,6 +26,7 @@ const jsonSchema = {
         prop2: {
             type: "number"
         }
-    }
+    },
+    required: ['prop1', 'prop2']
 }
 ```
