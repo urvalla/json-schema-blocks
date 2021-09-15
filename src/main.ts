@@ -81,7 +81,7 @@ function strOpts(opts: IStrOptions) {
  */
 export function str(minLengthOrOpts?: number | IStrOptions | null, maxLength?: number) {
   if (minLengthOrOpts === undefined || minLengthOrOpts === null) {
-    return strOpts({maxLength});
+    return strOpts({ maxLength });
   } else if (typeof minLengthOrOpts === 'number') {
     return strOpts({ minLength: minLengthOrOpts, maxLength });
   } else {
@@ -116,7 +116,6 @@ function numOpts(type: 'integer' | 'number', opts: INumOptions) {
   });
 }
 
-
 /**
  * Schema block for integer type
  *
@@ -127,9 +126,9 @@ function numOpts(type: 'integer' | 'number', opts: INumOptions) {
  */
 export function int(minimumOrOpts?: number | INumOptions | null, maximum?: number) {
   if (minimumOrOpts === undefined || minimumOrOpts === null) {
-    return numOpts('integer', {maximum});
+    return numOpts('integer', { maximum });
   } else if (typeof minimumOrOpts === 'number') {
-    return numOpts('integer',{ minimum: minimumOrOpts, maximum });
+    return numOpts('integer', { minimum: minimumOrOpts, maximum });
   } else {
     return numOpts('integer', minimumOrOpts);
   }
@@ -143,9 +142,9 @@ export function int(minimumOrOpts?: number | INumOptions | null, maximum?: numbe
  */
 export function num(minimumOrOpts?: number | INumOptions | null, maximum?: number) {
   if (minimumOrOpts === undefined || minimumOrOpts === null) {
-    return numOpts('number', {maximum});
+    return numOpts('number', { maximum });
   } else if (typeof minimumOrOpts === 'number') {
-    return numOpts('number',{ minimum: minimumOrOpts, maximum });
+    return numOpts('number', { minimum: minimumOrOpts, maximum });
   } else {
     return numOpts('number', minimumOrOpts);
   }

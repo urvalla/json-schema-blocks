@@ -1,6 +1,6 @@
 {
   "name": "json-schema-blocks",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "Building blocks for human-friendly JSON-Schema definitions",
   "main": "lib/main.js",
   "types": "lib/main.d.ts",
@@ -22,7 +22,9 @@
     "type": "git",
     "url": "git+https://github.com/urvalla/json-schema-blocks.git"
   },
-  "keywords": ["JSON Schema"],
+  "keywords": [
+    "JSON Schema"
+  ],
   "author": "Roman Ekzempliarov",
   "license": "MIT",
   "bugs": {

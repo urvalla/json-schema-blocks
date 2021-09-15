@@ -1,4 +1,4 @@
-import {int, num} from '../main';
+import { int, num } from '../main';
 
 test('num', () => {
   expect(num()).toStrictEqual({ type: 'number' });
