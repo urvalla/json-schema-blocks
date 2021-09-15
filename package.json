@@ -2,8 +2,8 @@
   "name": "json-schema-blocks",
   "version": "0.1.2",
   "description": "Building blocks for human-friendly JSON-Schema definitions",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/main.js",
+  "types": "lib/main.d.ts",
   "files": [
     "lib/*/*"
   ],

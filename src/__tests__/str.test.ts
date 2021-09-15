@@ -1,4 +1,4 @@
-import { str } from '../index';
+import { str } from '../main';
 
 test('str', () => {
   expect(str()).toStrictEqual({ type: 'string' });
