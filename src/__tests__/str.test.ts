@@ -15,7 +15,8 @@ test('str with minLength & maxLength', () => {
 });
 
 test('str with maxLength', () => {
-  expect(str(0, 10)).toStrictEqual({ type: 'string', minLength: 0, maxLength: 10 });
+  expect(str(undefined, 10)).toStrictEqual({ type: 'string', maxLength: 10 });
+  expect(str(null, 10)).toStrictEqual({ type: 'string', maxLength: 10 });
   expect(str({ maxLength: 10 })).toStrictEqual({ type: 'string', maxLength: 10 });
 });
 

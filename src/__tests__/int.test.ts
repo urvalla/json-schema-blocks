@@ -14,6 +14,7 @@ test('int with minimum and maximum value', () => {
 
 test('int with maximum value', () => {
   expect(int(undefined, 10)).toStrictEqual({ type: 'integer', maximum: 10 });
+  expect(int(null, 10)).toStrictEqual({ type: 'integer', maximum: 10 });
 });
 
 test('id(): shortcut to int(1)', () => {

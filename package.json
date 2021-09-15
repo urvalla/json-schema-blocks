@@ -22,7 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/urvalla/json-schema-blocks.git"
   },
-  "keywords": [],
+  "keywords": ["JSON Schema"],
   "author": "Roman Ekzempliarov",
   "license": "MIT",
   "bugs": {

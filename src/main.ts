@@ -60,6 +60,8 @@ export function obj(
 interface IStrOptions {
   minLength?: number;
   maxLength?: number;
+  pattern?: string;
+  format?: string;
 }
 
 function strOpts(opts: IStrOptions) {
@@ -72,12 +74,14 @@ function strOpts(opts: IStrOptions) {
 /**
  * Schema block for 'string' type
  *
+ * https://json-schema.org/understanding-json-schema/reference/string.html
+ *
  * @param minLengthOrOpts - number (minLength) or object with options
  * @param maxLength - maxLength option
  */
-export function str(minLengthOrOpts?: number | IStrOptions, maxLength?: number) {
-  if (minLengthOrOpts === undefined) {
-    return strOpts({});
+export function str(minLengthOrOpts?: number | IStrOptions | null, maxLength?: number) {
+  if (minLengthOrOpts === undefined || minLengthOrOpts === null) {
+    return strOpts({maxLength});
   } else if (typeof minLengthOrOpts === 'number') {
     return strOpts({ minLength: minLengthOrOpts, maxLength });
   } else {
@@ -97,27 +101,54 @@ export function enumStr(...values: string[]) {
   });
 }
 
+interface INumOptions {
+  minimum?: number;
+  maximum?: number;
+  multipleOf?: number;
+  exclusiveMaximum?: number;
+  exclusiveMinimum?: number;
+}
+
+function numOpts(type: 'integer' | 'number', opts: INumOptions) {
+  return compact({
+    type,
+    ...opts,
+  });
+}
+
+
 /**
  * Schema block for integer type
  *
- * @param minimum
+ * https://json-schema.org/understanding-json-schema/reference/numeric.html
+ *
+ * @param minimumOrOpts
  * @param maximum
  */
-export function int(minimum?: number, maximum?: number) {
-  return compact({
-    type: 'integer',
-    minimum,
-    maximum,
-  });
+export function int(minimumOrOpts?: number | INumOptions | null, maximum?: number) {
+  if (minimumOrOpts === undefined || minimumOrOpts === null) {
+    return numOpts('integer', {maximum});
+  } else if (typeof minimumOrOpts === 'number') {
+    return numOpts('integer',{ minimum: minimumOrOpts, maximum });
+  } else {
+    return numOpts('integer', minimumOrOpts);
+  }
 }
 
 /**
  * Schema block for "number" type
+ *
+ * https://json-schema.org/understanding-json-schema/reference/numeric.html
+ *
  */
-export function num() {
-  return {
-    type: 'number',
-  };
+export function num(minimumOrOpts?: number | INumOptions | null, maximum?: number) {
+  if (minimumOrOpts === undefined || minimumOrOpts === null) {
+    return numOpts('number', {maximum});
+  } else if (typeof minimumOrOpts === 'number') {
+    return numOpts('number',{ minimum: minimumOrOpts, maximum });
+  } else {
+    return numOpts('number', minimumOrOpts);
+  }
 }
 
 /**
