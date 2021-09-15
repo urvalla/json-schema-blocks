@@ -1,4 +1,4 @@
-import {enumStr, str} from '../main';
+import { enumStr, str } from '../main';
 
 test('str', () => {
   expect(str()).toStrictEqual({ type: 'string' });

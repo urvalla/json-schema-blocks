@@ -1,5 +1,5 @@
-import {bool} from '../main'
+import { bool } from '../main';
 
 test('bool', () => {
-    expect(bool()).toStrictEqual({ type: 'boolean' });
+  expect(bool()).toStrictEqual({ type: 'boolean' });
 });

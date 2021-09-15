@@ -1,6 +1,6 @@
 {
   "name": "json-schema-blocks",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Building blocks for human-friendly JSON-Schema definitions",
   "main": "lib/main.js",
   "types": "lib/main.d.ts",
