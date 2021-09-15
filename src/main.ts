@@ -1,13 +1,13 @@
 import assert = require('assert');
 
 interface ICommonOptions {
-  title?: string,
-  description?: string,
-  default?: any,
-  examples?: any[],
-  deprecated?: boolean,
-  readOnly?: boolean,
-  writeOnly?: boolean
+  title?: string;
+  description?: string;
+  default?: any;
+  examples?: any[];
+  deprecated?: boolean;
+  readOnly?: boolean;
+  writeOnly?: boolean;
 }
 
 /**
@@ -38,9 +38,9 @@ export function nullable(value: any) {
 }
 
 interface IObjOptions extends ICommonOptions {
-  optional?: string[],
-  required?: string[],
-  additionalProperties?: boolean
+  optional?: string[];
+  required?: string[];
+  additionalProperties?: boolean;
 }
 
 /**
@@ -49,10 +49,7 @@ interface IObjOptions extends ICommonOptions {
  * @param properties - properties
  * @param options
  */
-export function obj(
-  properties: Record<string, any>,
-  options: IObjOptions = {},
-) {
+export function obj(properties: Record<string, any>, options: IObjOptions = {}) {
   let required: string[] = [];
 
   if ('required' in options) {
@@ -210,7 +207,7 @@ export function num(minimumOrOpts?: number | INumOptions | null, maximum?: numbe
  * E.g. record ID.
  */
 export function id(options: ICommonOptions = {}) {
-  return int({minimum: 1, ...options});
+  return int({ minimum: 1, ...options });
 }
 
 /**
